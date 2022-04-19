@@ -10,22 +10,20 @@ module.exports = class Session {
 
   /**
    * Creates an entry
-   * @param {*} trx 
-   * @param {*} model 
-   * @param {*} values 
+   * @param {*} trx
+   * @param {*} model
+   * @param {*} values
    */
-  create(trx, model, values)  {
-
-  }
+  create(trx, model, values) {}
 
   /**
    * Gets the specified entry from the cache
    * @param {*} trx
-   * @param {*} model 
-   * @param {*} id 
+   * @param {*} model
+   * @param {*} id
    */
   read(trx, model, id) {
-    const entry = this.cache.get(model + '@' + id);
+    const entry = this.cache.get(model + "@" + id);
     if (entry !== undefined) {
       return Promise.resolve(entry);
     }
@@ -35,51 +33,39 @@ module.exports = class Session {
     if (!this.pending[model].hasOwnProperty(id)) {
       this.pending[model][id] = [];
     }
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       this.pending[model][id].push(resolve, reject);
     });
   }
   /**
    * Sets a list of entries
    * @param {*} trx
-   * @param {*} model 
-   * @param {*} id 
-   * @param {*} values 
+   * @param {*} model
+   * @param {*} id
+   * @param {*} values
    */
-  update(trx, model, id, values) {
+  update(trx, model, id, values) {}
 
-  }
+  delete(trx, model, id) {}
 
-  delete(trx, model, id) {
+  request(trx, model, filter, orders, offset, limit) {}
 
-  }
+  commit(trx) {}
 
-  request(trx, model, filter, orders, offset, limit) {
-    
-  }
-
-  commit(trx) {
-
-  }
-
-  rollback(trx) {
-
-  }
+  rollback(trx) {}
 
   /**
    * Resolves pending requests
    */
   resolve() {
-    for(let model in this.pending) {
+    for (let model in this.pending) {
       let indexes = this.pending[model];
       let ids = [];
-      for(let id in indexes) {
+      for (let id in indexes) {
         ids.push(id);
       }
       if (ids.length > 0) {
-
       }
     }
   }
-
-}
+};

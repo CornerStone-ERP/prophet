@@ -1,15 +1,17 @@
-const pkg = require('./package.json');
-const commander = require('commander');
+#!/usr/bin/node
+
+const pkg = require("./package.json");
+const commander = require("commander");
 
 const program = new commander.Command();
 
 program.version(pkg.version);
 
 // error on unknown commands
-program.on('command:*', function () {
+program.on("command:*", function () {
   console.error(
-`
-ERROR : Invalid command: ${program.args.join(' ')}.
+    `
+ERROR : Invalid command: ${program.args.join(" ")}.
 Please you must use a command (start, status, ...)
 `
   );
